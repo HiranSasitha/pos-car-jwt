@@ -6,6 +6,7 @@ import com.poscarrent.pos.repo.RoleRepo;
 import com.poscarrent.pos.repo.UserRepo;
 import com.poscarrent.pos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepo roleRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User createNewUser(User user) {
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService {
             user.setUserName("admin123");
             user.setUserFirstName("Hiran");
             user.setUserLastName("Henarath");
-            user.setPassword("admin@123");
+            user.setPassword(getPasswordEncode("admin@123"));
             Set<Role> roles = new HashSet<>();
             roles.add(adminRole);
             user.setRoles(roles);
@@ -62,11 +65,15 @@ public class UserServiceImpl implements UserService {
             user.setUserName("user123");
             user.setUserFirstName("Sasitha");
             user.setUserLastName("Senarath");
-            user.setPassword("user@123");
+            user.setPassword(getPasswordEncode("user@123"));
             Set<Role> roles = new HashSet<>();
             roles.add(userRole);
             user.setRoles(roles);
             userRepo.save(user);
         }
+    }
+
+    public String getPasswordEncode(String password){
+        return passwordEncoder.encode(password);
     }
 }

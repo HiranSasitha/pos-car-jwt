@@ -3,12 +3,11 @@ package com.poscarrent.pos.controller;
 import com.poscarrent.pos.entity.Role;
 import com.poscarrent.pos.entity.User;
 import com.poscarrent.pos.service.UserService;
-import jakarta.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/user")
@@ -24,5 +23,15 @@ public class UserController {
     @PostConstruct
     public void intRoleAndUser(){
         userService.initRoleAndUser();
+    }
+
+    @GetMapping("/for-admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @GetMapping("/for-user")
+    public String user(){
+        return "user";
     }
 }
