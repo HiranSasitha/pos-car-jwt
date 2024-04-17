@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("/create-new-role")
+    @PostMapping("/register-new-user")
     public User registerNewUser(@RequestBody User user){
         return userService.createNewUser(user);
     }
@@ -27,6 +27,7 @@ public class UserController {
 
     @GetMapping("/for-admin")
     public String admin(){
+        System.out.println("hiran");
         return "admin";
     }
 

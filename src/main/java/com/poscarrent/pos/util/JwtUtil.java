@@ -30,7 +30,7 @@ public class JwtUtil {
     }
 
     private Claims getAllClaimsByToken(String token){
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(token).getBody();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
     }
 
    public Boolean validateToken(String token, UserDetails userDetails){
