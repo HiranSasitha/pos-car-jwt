@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
         Role adminRole = new Role();
         Role userRole = new Role();
 
-        if (!roleRepo.existsById("Admin")){
-            adminRole.setRoleName("Admin");
+        if (!roleRepo.existsById("ROLE_ADMIN")){
+            adminRole.setRoleName("ROLE_ADMIN");
             adminRole.setRoleDescription("Admin role");
 
             roleRepo.save(adminRole);
@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
         System.out.println(adminRole.getRoleName());
 
 
-        if (!roleRepo.existsById("User")){
-            userRole.setRoleName("User");
+        if (!roleRepo.existsById("ROLE_USER")){
+            userRole.setRoleName("ROLE_USER");
             userRole.setRoleDescription("User role");
             roleRepo.save(userRole);
         }
