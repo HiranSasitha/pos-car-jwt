@@ -3,6 +3,7 @@ package com.poscarrent.pos.service;
 
 
 import com.poscarrent.pos.dto.LoginDto;
+import com.poscarrent.pos.dto.UserResponseDto;
 import com.poscarrent.pos.entity.Role;
 import com.poscarrent.pos.entity.User;
 import com.poscarrent.pos.repo.UserRepo;
@@ -31,16 +32,19 @@ public class JwtService implements  UserDetailsService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public String createJwtToken(LoginDto dto) throws Exception{
+    public UserResponseDto createJwtToken(LoginDto dto) throws Exception{
         String userName = dto.getUserName();
         String password = dto.getPassword();
+        System.out.println(userName);
+        System.out.println(password);
 
         authenticate(userName,password);
 
         UserDetails userDetails = loadUserByUsername(userName);
         String generateToken = jwtUtil.generateJwtToken(userDetails);
+        User user = userRepo.findById(userName).get();
 
-        return generateToken;
+        return new UserResponseDto(generateToken,user);
 
     }
 
